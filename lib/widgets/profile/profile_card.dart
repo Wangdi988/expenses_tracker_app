@@ -19,7 +19,7 @@ class ProfileCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: 16),
               child: Image.asset('assets/images/avater.png',
-                        height: 150, width: 150, fit: BoxFit.contain
+                        height: 200, width: 200, fit: BoxFit.contain
                       ),
 
             ),

@@ -57,10 +57,20 @@ class _HomeLayoutState extends State<HomeLayout>{
                     // assets/images/avater.png
                     const Icon(Icons.search),
 
-                    Image.asset('assets/images/avater.png',
-                            height: 40, width: 50, fit: BoxFit.contain),
+                    // Image.asset('assets/images/avater.png',
+                    //         height: 40, width: 50, fit: BoxFit.contain),
 
-                    
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProfileScreen()));
+                      },
+                      child: Image.asset(
+                        'assets/images/avater.png',
+                        height: 40,
+                        width: 50,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ],
 
                   
@@ -77,7 +87,20 @@ class _HomeLayoutState extends State<HomeLayout>{
         child: screens[_selectedIndex],
       ),
 
-      
+      floatingActionButton: (_selectedIndex == 0)
+      ? FloatingActionButton(
+          onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>
+                  // we are passing the addTask method in the form of function property to AddTask widget
+                 AddTransactionsScreen()));
+          },
+          backgroundColor: Colors.red,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        )
+      : SizedBox.shrink(),
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

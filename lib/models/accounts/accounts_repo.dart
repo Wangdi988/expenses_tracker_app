@@ -6,9 +6,13 @@ import 'package:expense_tracker_app/plugins/http.dart';
 Future<List<AccountsModel>> loadAccounts() async{
     final res = await GetRequest('account');
 
-    print('Accounts????////');
-    print(jsonDecode(res.body));
+    print('Accounts????//// start');
+    print(jsonDecode(res.body)['data']);
     List<AccountsModel> tempAccounts = [];
+
+    print((res.body)['data']);
+
+    print('Accounts????//// ends>>');
 
     for(final data in jsonDecode(res.body)['data']){
       tempAccounts.add(AccountsModel(

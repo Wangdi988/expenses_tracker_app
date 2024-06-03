@@ -25,17 +25,13 @@ class _AccountsCardState extends State<AccountsCard>{
   }
 
   Future<void> loadAccountsData() async {
-    // print("Sangay===?????");
-    // await loadSummaryData();
+  
     // final  res = await loadAccounts();
-    final res = await loadAccounts();
+    // final res = await loadAccounts();
 
-    print("accounts response start");
-    // print(res);
-    print("accounts response end");
-    setState(() {
-      accounts = res;
-    });
+    // setState(() {
+    //   accounts = res;
+    // });
 
     // print('summary');
     // print(summary.expenses);
@@ -63,14 +59,14 @@ class _AccountsCardState extends State<AccountsCard>{
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                // children: [
-                //   AccountTypesCard(),
-                //   AccountTypesCard(),
-                //   AccountTypesCard(),
-                //   AccountTypesCard(),
-                // ],
-                children: accounts.map((el)=>AccountTypesCard(el)
-                ).toList(),
+                children: [
+                  AccountTypesCard(),
+                  AccountTypesCard(),
+                  AccountTypesCard(),
+                  AccountTypesCard(),
+                ],
+                // children: accounts.map((el)=>AccountTypesCard(el)
+                // ).toList(),
               ),
             ),
           ),

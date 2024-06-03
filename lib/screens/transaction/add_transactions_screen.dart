@@ -15,6 +15,9 @@ class _AddTransactionsScreenState extends State<AddTransactionsScreen>{
 
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
+  TextEditingController _date = TextEditingController();
+  TextEditingController _amount = TextEditingController();
+  String? _selectedExpense;
   FocusNode passwordFocusNode = FocusNode();
   bool loading = false;
 
@@ -60,6 +63,7 @@ class _AddTransactionsScreenState extends State<AddTransactionsScreen>{
           child: Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(horizontal: 15),
+            margin: EdgeInsets.only(top:16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -67,27 +71,6 @@ class _AddTransactionsScreenState extends State<AddTransactionsScreen>{
                   child:Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // Container(
-                      //   height: 200,
-                      //   width: 150,
-                      //   margin: EdgeInsets.only(bottom: 15),
-                      //   child: Image.asset('assets/images/logo.png', 
-                      //   height: 80, fit: BoxFit.contain
-                      //   ),
-                      // ),
-
-                      // Container(
-                      //   alignment: Alignment.centerLeft,
-                      //   padding: EdgeInsets.symmetric(vertical: 16),
-                      //   child: Column(
-                      //     children: [
-                      //       Text(
-                      //         "Login",
-                      //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      //         )
-                      //     ],
-                      //   ),
-                      // ),
 
                       TextFormField(
                         autofocus: true,
@@ -107,34 +90,174 @@ class _AddTransactionsScreenState extends State<AddTransactionsScreen>{
                       ),
 
                       Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: TextFormField(
-                        onEditingComplete: loginUser,
-                        controller: _password,
-                        // association of focus node with password
-                        focusNode: passwordFocusNode,
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: TextFormField(
                         autofocus: true,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "Password"),
+                        controller: _date,
+                        onEditingComplete: () {
+                          passwordFocusNode.requestFocus();
+                        },
+
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: 'Date'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your Date';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(vertical: 16),
+                      //   child: TextFormField(
+                      //   autofocus: true,
+                      //   controller: _username,
+                      //   onEditingComplete: () {
+                      //     passwordFocusNode.requestFocus();
+                      //   },
+
+                      //     decoration: InputDecoration(
+                      //         border: OutlineInputBorder(), labelText: 'Account'),
+                      //     validator: (value) {
+                      //       if (value == null || value.isEmpty) {
+                      //         return 'Please enter your Account';
+                      //       }
+                      //       return null;
+                      //     },
+                      //   ),
+                      // ),
+
+                      // DropdownButtonFormField<String>(
+                      //   items: <String>['Fimaily Dinner', 'Shopping', 'Travelling', 'Other'].map((String value) {
+                      //     return DropdownMenuItem<String>(
+                      //       value: value,
+                      //       child: Text(value),
+                      //     );
+                      //   }).toList(),
+                      //   onChanged: (value) {
+
+                      //   },
+                      // ),
+
+                      // SizedBox(height: 16),
+                        // DropdownButtonFormField<String>(
+                        //   value: _selectedExpense,
+                        //   decoration: InputDecoration(
+                        //     border: OutlineInputBorder(),
+                        //     labelText: 'Expenses',
+                        //   ),
+                        //   items: <String>['Rent', 'Utilities', 'Food', 'Transportation', 'Entertainment']
+                        //       .map<DropdownMenuItem<String>>((String value) {
+                        //     return DropdownMenuItem<String>(
+                        //       value: value,
+                        //       child: Text(value),
+                        //     );
+                        //   }).toList(),
+                        //   onChanged: (String? newValue) {
+                        //     setState(() {
+                        //       _selectedExpense = newValue;
+                        //     });
+                        //   },
+                        //   validator: (value) {
+                        //     if (value == null || value.isEmpty) {
+                        //       return 'Please select an expense';
+                        //     }
+                        //     return null;
+                        //   },
+                        // ),
+
+                      SizedBox(height: 16),
+                      DropdownButtonFormField<String>(
+                        value: _selectedExpense,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Account',
+                        ),
+                        items: <String>['Rent', 'Utilities', 'Food', 'Transportation', 'Entertainment']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedExpense = newValue;
+                          });
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
+                            return 'Please select an account';
                           }
                           return null;
                         },
                       ),
-                    ),
+                      SizedBox(height: 16),
+                      DropdownButtonFormField<String>(
+                        value: _selectedExpense,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Expense',
+                        ),
+                        items: <String>['Rent', 'Utilities', 'Food', 'Transportation', 'Entertainment']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedExpense = newValue;
+                          });
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select an expense';
+                          }
+                          return null;
+                        },
+                      ),
+                      
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: TextFormField(
+                        autofocus: true,
+                        controller: _amount,
+                        onEditingComplete: () {
+                          passwordFocusNode.requestFocus();
+                        },
 
-                    // Container(
-                    //     alignment: Alignment.centerRight,
-                    //     child: Column(
-                    //       children: [
-                    //         Text("Forgot Password?", style: TextStyle(fontWeight: FontWeight.bold))
-                    //       ],
-                    //     ),
-                    //   ),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: 'Ampunt in Nu'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your Expenses';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: TextFormField(
+                        autofocus: true,
+                        controller: _username,
+                        onEditingComplete: () {
+                          passwordFocusNode.requestFocus();
+                        },
+
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: 'Images'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your Images';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
 
                     Container(
                 padding: EdgeInsets.symmetric(vertical: 16),

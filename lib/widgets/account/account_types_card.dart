@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 
 class AccountTypesCard extends StatelessWidget {
-  AccountsModel accounts;
-  AccountTypesCard(this.accounts);
+  // AccountsModel accounts;
+  // AccountTypesCard(this.accounts);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,13 +43,14 @@ class AccountTypesCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(accounts.title),
-                      // Image.asset('assets/images/avater.png',
-                      //       height: 30, width: 30, fit: BoxFit.contain),
+                      // Text(accounts.title),
+                      Text("Bank of Bhutan"),
+                      Image.asset('assets/images/avater.png',
+                            height: 30, width: 30, fit: BoxFit.contain),
 
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(accounts.img),
-                      )
+                      // CircleAvatar(
+                      //   backgroundImage: NetworkImage(accounts.img),
+                      // )
                     ],
                   ),
                 ),
@@ -58,7 +59,8 @@ class AccountTypesCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Nu. " + accounts.openingBalance.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text("Nu. " + accounts.openingBalance.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text("Nu. 12,000", style: TextStyle(fontWeight: FontWeight.bold),),
                       Text("Nu. 2,000 this month", style: TextStyle(fontSize: 10),)
                     ],
                   ),
